@@ -17,8 +17,22 @@ import org.springframework.context.annotation.ComponentScan;
 //@SpringBootApplication
 @SpringBootConfiguration
 /**
+ * EnableAutoConfiguration中两个关键注解:
+ * 1.@AutoConfigurationPackage:添加该注解的类所在的package作为自动配置package进行管理
  * 利用Registrar給容器中导入一系列组件
  * 将指定的一个包下的所有组件导入(MainApplication所在的包下)
+ * 2.@Import({AutoConfigurationImportSelector.class}):
+ * 使用Import自动导入所有符合自动配置条件的Bean定义并加载到IOC容器
+ * a.利用getAutoConfigurationEntry(AnnotationMetadata annotationMetadata)给容器中批量导入组件
+ * b.List<String> configurations = this.getCandidateConfigurations(annotationMetadata, attributes)
+ * 获取到所有需要导入到容器中的配置类(127个)
+ * c.利用工厂加载Map<String, List<String>> loadSpringFactories(@Nullable ClassLoader classLoader)
+ * 得到所有的组件
+ * d.从META-INF/spring.factories位置来加载一个文件:默认扫描当前系统里所有
+ * META-INF/spring.factories位置的文件
+ * spring-boot-autoconfigure-2.3.5.RELEASE.jar包里也有META-INF/spring.factories
+ * e.文件里面写死了springboot一启动就要给容器中加载的所有配置类(21行-148行)
+ * f.127个场景的所有自动配置启动时默认全部加载,按照条件装配规则,最终实际按需配置
  */
 @EnableAutoConfiguration
 @ComponentScan("org.example.boot")
