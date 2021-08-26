@@ -3,7 +3,10 @@ package org.example.boot.config;
 import ch.qos.logback.core.db.DBHelper;
 import org.example.boot.bean.Pet;
 import org.example.boot.bean.User;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -21,6 +24,8 @@ import org.springframework.context.annotation.Import;
  */
 @Import({User.class, DBHelper.class})
 @Configuration(proxyBeanMethods = true) //告诉springboot这是一个配置类==配置文件
+//@ConditionalOnBean(name = "tom")
+@ConditionalOnMissingBean(name = "tom")
 public class MyConfig {
 
     /**
@@ -29,6 +34,7 @@ public class MyConfig {
      */
     //给容器中添加组件,以方法名作为组件的id.返回类型就是组件类型
     // 返回的值,就是组件在容器中的实例
+
     @Bean
     public User user01() {
         User zhangsan = new User("zhangsan",18);
@@ -38,7 +44,7 @@ public class MyConfig {
 //        return new User("zhangsan", 18);
     }
 
-    @Bean("tom")
+    @Bean("tom22")
     public Pet tomcatPet() {
         return new Pet("tomcat");
     }
