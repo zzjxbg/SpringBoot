@@ -1,9 +1,11 @@
 package org.example.boot.config;
 
+import ch.qos.logback.core.db.DBHelper;
 import org.example.boot.bean.Pet;
 import org.example.boot.bean.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * 1.配置类里使用@Bean标注在方法上给容器注册组件,默认也是单实例的
@@ -14,8 +16,11 @@ import org.springframework.context.annotation.Configuration;
  *      组件依赖
  * 配置类组件之间无依赖关系用Lite模式加速容器启动过程,减少判断
  * 配置类组件之间有依赖关系,方法会被调用得到之前单实例组件,用Full模式
+ * 4.@Import({User.class,DBHelper.class})
+ *   给容器中自动创建出这两个类型的组件,默认组件的名字就是全类名(Source Root)
  */
-@Configuration(proxyBeanMethods = false) //告诉springboot这是一个配置类==配置文件
+@Import({User.class, DBHelper.class})
+@Configuration(proxyBeanMethods = true) //告诉springboot这是一个配置类==配置文件
 public class MyConfig {
 
     /**

@@ -1,5 +1,6 @@
 package org.example.boot;
 
+import ch.qos.logback.core.db.DBHelper;
 import org.example.boot.bean.Pet;
 import org.example.boot.bean.User;
 import org.example.boot.config.MyConfig;
@@ -38,7 +39,7 @@ public class MainApplication {
         MyConfig bean = run.getBean(MyConfig.class);
         System.out.println(bean);
 
-        //5.如果@Configuration(proxyBeanMethods = true) 代理对象调用方法
+        //如果@Configuration(proxyBeanMethods = true) 代理对象调用方法
         //springboot总会检查这个组件是否在容器中(从容器中找组件)
         //即保持组件单实例
         User user = bean.user01();
@@ -48,5 +49,15 @@ public class MainApplication {
         User user01 = run.getBean("user01",User.class);
         Pet tom = run.getBean("tom",Pet.class);
         System.out.println("用户的宠物:"+(user01.getPet()==tom));
+
+        //5.获取组件
+        String[] beanNamesForType = run.getBeanNamesForType(User.class);
+        System.out.println("=======");
+        for(String s : beanNamesForType) {
+            System.out.println(s);
+        }
+
+        DBHelper bean1 = run.getBean(DBHelper.class);
+        System.out.println(bean1);
     }
 }
