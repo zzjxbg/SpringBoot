@@ -24,7 +24,7 @@ import org.springframework.context.annotation.*;
  * 5.@ImportResource("classpath:beans.xml")导入spring的配置文件,使其生效
  */
 @Import({User.class, DBHelper.class})
-@Configuration(proxyBeanMethods = true) //告诉springboot这是一个配置类==配置文件
+@Configuration(proxyBeanMethods = true) //告诉springboot这是一个配置类==xml配置文件
 //@ConditionalOnBean(name = "tom")
 @ConditionalOnMissingBean(name = "tom")
 @ImportResource("classpath:beans.xml")
