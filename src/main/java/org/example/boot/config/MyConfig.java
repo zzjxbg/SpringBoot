@@ -5,10 +5,7 @@ import org.example.boot.bean.Pet;
 import org.example.boot.bean.User;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 
 /**
  * 1.配置类里使用@Bean标注在方法上给容器注册组件,默认也是单实例的
@@ -21,11 +18,14 @@ import org.springframework.context.annotation.Import;
  * 配置类组件之间有依赖关系,方法会被调用得到之前单实例组件,用Full模式
  * 4.@Import({User.class,DBHelper.class})
  *   给容器中自动创建出这两个类型的组件,默认组件的名字就是全类名(Source Root)
+ *
+ * 5.@ImportResource("classpath:beans.xml")导入spring的配置文件,使其生效
  */
 @Import({User.class, DBHelper.class})
 @Configuration(proxyBeanMethods = true) //告诉springboot这是一个配置类==配置文件
 //@ConditionalOnBean(name = "tom")
 @ConditionalOnMissingBean(name = "tom")
+@ImportResource("classpath:beans.xml")
 public class MyConfig {
 
     /**
