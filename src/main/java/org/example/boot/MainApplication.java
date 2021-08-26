@@ -16,6 +16,10 @@ import org.springframework.context.annotation.ComponentScan;
  */
 //@SpringBootApplication
 @SpringBootConfiguration
+/**
+ * 利用Registrar給容器中导入一系列组件
+ * 将指定的一个包下的所有组件导入(MainApplication所在的包下)
+ */
 @EnableAutoConfiguration
 @ComponentScan("org.example.boot")
 public class MainApplication {
