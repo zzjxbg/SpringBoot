@@ -32,7 +32,7 @@ import org.springframework.context.annotation.ComponentScan;
  * META-INF/spring.factories位置的文件
  * spring-boot-autoconfigure-2.3.5.RELEASE.jar包里也有META-INF/spring.factories
  * e.文件里面写死了springboot一启动就要给容器中加载的所有配置类(21行-148行)
- * f.127个场景的所有自动配置启动时默认全部加载,按照条件装配规则,最终实际按需配置
+ * f.127个场景的所有自动配置启动时默认全部加载,按照条件装配(@Conditional)规则,最终实际按需配置
  */
 @EnableAutoConfiguration
 @ComponentScan("org.example.boot")
