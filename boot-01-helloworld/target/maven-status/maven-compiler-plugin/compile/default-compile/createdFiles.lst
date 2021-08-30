@@ -1,0 +1,6 @@
+org\example\boot\bean\User.class
+org\example\boot\config\MyConfig.class
+org\example\boot\bean\Pet.class
+org\example\boot\bean\Car.class
+org\example\boot\controller\HelloController.class
+org\example\boot\MainApplication.class
